@@ -1,7 +1,14 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+
 function App() {
+  const queryClient = new QueryClient()
 
   return (
-    <h1>Hello World</h1>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <div className="App">Hello World</div>
+    </QueryClientProvider>
   )
 }
 
