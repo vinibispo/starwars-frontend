@@ -3,7 +3,7 @@ import Planets from "./pages/planets";
 
 const router = createBrowserRouter(
   [
-    { path: "/", action: () => <div>Home</div> },
+    { path: "/", element: <div>Home</div> },
     { path: "/planets", element: <Planets /> },
   ]
 )
