@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import Router from "./router"
 
 function App() {
   const queryClient = new QueryClient()
@@ -7,7 +8,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="App">Hello World</div>
+      <Router />
     </QueryClientProvider>
   )
 }
