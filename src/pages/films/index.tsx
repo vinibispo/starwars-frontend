@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom"
 import { useFilms } from "../../hooks/films"
+import { styled } from "../../shared/styles"
+import Card from "../../shared/card"
 
+const Container = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gap: '1rem',
+  padding: '1rem',
+})
 export default function Films() {
   const { films, isLoading } = useFilms()
 
@@ -9,14 +17,13 @@ export default function Films() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div>
+        <Container>
           {films?.map((film) => (
-            <div key={film.id}>
-              <h2>{film.title}</h2>
+            <Card key={film.id} title={film.title} type="film">
               <Link to={`/films/${film.id}`}>View</Link>
-            </div>
+            </Card>
           ))}
-        </div>
+        </Container>
       )}
     </main>
   )
