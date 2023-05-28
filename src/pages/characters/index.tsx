@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useCharacters } from "../../hooks/useCharacters"
 
 export default function Characters() {
@@ -11,6 +12,7 @@ export default function Characters() {
         <div key={character.id}>
           <h2>{character.name}</h2>
           <p>{character.gender}</p>
+          <Link to={`/characters/${character.id}`}>View</Link>
         </div>
       ))}
     </main>
