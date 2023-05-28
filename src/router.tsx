@@ -3,6 +3,7 @@ import Planets from "./pages/planets";
 import PlanetId from "./pages/planets/id";
 import Characters from "./pages/characters";
 import CharacterId from "./pages/characters/id";
+import Films from "./pages/films";
 
 const router = createBrowserRouter(
   [
@@ -11,6 +12,7 @@ const router = createBrowserRouter(
     { path: "/planets/:id", element: <PlanetId /> },
     { path: "/characters", element: <Characters /> },
     { path: "/characters/:id", element: <CharacterId /> },
+    { path: "/films", element: <Films /> },
   ]
 )
 export default function Router() {
