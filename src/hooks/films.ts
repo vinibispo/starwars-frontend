@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 import { api } from "../resources/api"
+import { filmSchema, filmsSchema } from "../resources/schema/films"
 
 const fetchFilm = async (id: string) => {
   const res = await api.get(`/films/${id}`)
-  return res.data
+  return filmSchema.parse(res.data)
 }
 export function useFilm(id: string) {
   const { data, ...rest } = useQuery({
@@ -16,7 +17,7 @@ export function useFilm(id: string) {
 
 const fetchFilms = async () => {
   const res = await api.get(`/films`)
-  return res.data
+  return filmsSchema.parse(res.data)
 }
 export function useFilms() {
   const { data, ...rest } = useQuery({

@@ -8,7 +8,7 @@ export default function PlanetId() {
 
   return (
     <main>
-      {isLoading ? (
+      {isLoading || !planet ? (
         <p>Loading...</p>
       ) : (
         <div>

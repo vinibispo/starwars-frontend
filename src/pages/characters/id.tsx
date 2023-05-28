@@ -13,8 +13,8 @@ export default function CharacterId() {
         <div>Loading...</div>
       ) : (
         <div>
-          <h2>{character.name}</h2>
-          <p>{character.gender}</p>
+          <h2>{character?.name}</h2>
+          <p>{character?.gender}</p>
         </div>
       )}
     </div>

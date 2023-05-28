@@ -10,7 +10,7 @@ export default function Films() {
         <div>Loading...</div>
       ) : (
         <div>
-          {films.map((film) => (
+          {films?.map((film) => (
             <div key={film.id}>
               <h2>{film.title}</h2>
               <Link to={`/films/${film.id}`}>View</Link>

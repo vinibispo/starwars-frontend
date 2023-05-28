@@ -6,7 +6,7 @@ export default function FilmId() {
   if (!id) throw new Error("No id provided")
   const { film, isLoading } = useFilm(id)
 
-  return isLoading ? <div>Loading...</div> : (
+  return (isLoading || !film) ? <div>Loading...</div> : (
     <div>
       <h1>{film.title}</h1>
       <p>{film.opening_crawl}</p>

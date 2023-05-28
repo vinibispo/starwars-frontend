@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../resources/api";
+import { characterSchema, charactersSchema } from "../resources/schema/characters";
+
 
 const fetchCharacter = async (id: string) => {
   const res = await api.get(`/people/${id}`)
-  return res.data
+  return characterSchema.parse(res.data)
 }
 export function useCharacter(id: string) {
   const { data, ...rest } = useQuery({
@@ -16,7 +18,7 @@ export function useCharacter(id: string) {
 
 const fetchCharacters = async () => {
   const res = await api.get('/people')
-  return res.data
+  return charactersSchema.parse(res.data)
 }
 export function useCharacters() {
   const { data, ...rest } = useQuery({

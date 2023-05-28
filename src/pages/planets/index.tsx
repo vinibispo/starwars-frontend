@@ -5,7 +5,7 @@ export default function Planets() {
   const { planets, isLoading, isError } = usePlanets()
   return (
     <main>
-      {planets.map((planet) => (
+      {planets?.map((planet) => (
         <div key={planet.id}>
           <h2>{planet.name}</h2>
           <p>Population: {planet.population}</p>
