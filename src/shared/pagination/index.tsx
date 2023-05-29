@@ -1,6 +1,6 @@
-import { styled } from "../styles"
-import { ArrowLeftIcon } from "./arrow-left"
-import ArrowRightIcon from "./arrow-right"
+import { styled } from '../styles'
+import { ArrowLeftIcon } from './arrow-left'
+import ArrowRightIcon from './arrow-right'
 
 const PaginationContainer = styled('div', {
   display: 'flex',
@@ -22,7 +22,7 @@ const Button = styled('button', {
   svg: {
     stroke: '$primary',
     width: '2rem',
-  }
+  },
 })
 
 type PaginationProps = {
@@ -32,7 +32,13 @@ type PaginationProps = {
   isDisabledNextPage: boolean
   isDisabledPrevPage: boolean
 }
-export const Pagination = ({ onNextPage, onPrevPage, currentPage, isDisabledNextPage, isDisabledPrevPage }: PaginationProps) => {
+export const Pagination = ({
+  onNextPage,
+  onPrevPage,
+  currentPage,
+  isDisabledNextPage,
+  isDisabledPrevPage,
+}: PaginationProps) => {
   return (
     <PaginationContainer>
       <Button onClick={onPrevPage} disabled={isDisabledPrevPage}>

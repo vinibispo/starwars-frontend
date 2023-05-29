@@ -1,8 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "../resources/api";
-import { characterSchema, charactersSchema } from "../resources/schema/characters";
-import { useCallback, useMemo, useState } from "react";
-
+import { useQuery } from '@tanstack/react-query'
+import { api } from '../resources/api'
+import {
+  characterSchema,
+  charactersSchema,
+} from '../resources/schema/characters'
+import { useCallback, useMemo, useState } from 'react'
 
 const fetchCharacter = async (id: string) => {
   const res = await api.get(`/people/${id}`)
@@ -10,7 +12,7 @@ const fetchCharacter = async (id: string) => {
 }
 export function useCharacter(id: string) {
   const { data, ...rest } = useQuery({
-    queryKey: ["character", id],
+    queryKey: ['character', id],
     queryFn: () => fetchCharacter(id),
   })
 
@@ -23,12 +25,12 @@ export function useCharacters() {
   const fetchCharacters = async (page: number) => {
     const res = await api.get('/people')
     if (page === 1) {
-      setTotalPages(Number(res.headers["total-pages"]))
+      setTotalPages(Number(res.headers['total-pages']))
     }
     return charactersSchema.parse(res.data)
   }
   const { data, ...rest } = useQuery({
-    queryKey: ["characters", String(page)],
+    queryKey: ['characters', String(page)],
     queryFn: () => fetchCharacters(page),
   })
 
@@ -48,6 +50,13 @@ export function useCharacters() {
     return page === 1
   }, [page])
 
-
-  return { characters: data, onNextPage, onPrevPage, isDisabledNextPage, isDisabledPrevPage, currentPage: page, ...rest }
+  return {
+    characters: data,
+    onNextPage,
+    onPrevPage,
+    isDisabledNextPage,
+    isDisabledPrevPage,
+    currentPage: page,
+    ...rest,
+  }
 }

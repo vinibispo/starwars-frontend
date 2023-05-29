@@ -1,12 +1,19 @@
-import { Link } from "react-router-dom"
-import { usePlanets } from "../../hooks/planets"
-import Card from "../../shared/card"
-import { Pagination } from "../../shared/pagination"
-import { Container } from "../../ui/container"
-
+import { usePlanets } from '../../hooks/planets'
+import Card from '../../shared/card'
+import { Pagination } from '../../shared/pagination'
+import { Container } from '../../ui/container'
 
 export default function Planets() {
-  const { planets, isLoading, isError, onNextPage, onPrevPage, currentPage, isDisabledNextPage, isDisabledPrevPage } = usePlanets()
+  const {
+    planets,
+    isLoading,
+    isError,
+    onNextPage,
+    onPrevPage,
+    currentPage,
+    isDisabledNextPage,
+    isDisabledPrevPage,
+  } = usePlanets()
   return (
     <main>
       <Container>

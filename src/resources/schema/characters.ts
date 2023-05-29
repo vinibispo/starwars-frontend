@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from 'zod'
 
 const filmSchema = z.object({
   title: z.string(),

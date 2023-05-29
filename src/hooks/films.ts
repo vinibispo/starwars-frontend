@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query"
-import { api } from "../resources/api"
-import { filmSchema, filmsSchema } from "../resources/schema/films"
-import { useCallback, useMemo, useState } from "react"
+import { useQuery } from '@tanstack/react-query'
+import { api } from '../resources/api'
+import { filmSchema, filmsSchema } from '../resources/schema/films'
+import { useCallback, useMemo, useState } from 'react'
 
 const fetchFilm = async (id: string) => {
   const res = await api.get(`/films/${id}`)
@@ -9,7 +9,7 @@ const fetchFilm = async (id: string) => {
 }
 export function useFilm(id: string) {
   const { data, ...rest } = useQuery({
-    queryKey: ["films", id],
+    queryKey: ['films', id],
     queryFn: () => fetchFilm(id),
   })
 
@@ -22,12 +22,12 @@ export function useFilms() {
   const fetchFilms = async (page: number) => {
     const res = await api.get('/films')
     if (page === 1) {
-      setTotalPages(Number(res.headers["total-pages"]))
+      setTotalPages(Number(res.headers['total-pages']))
     }
     return filmsSchema.parse(res.data)
   }
   const { data, ...rest } = useQuery({
-    queryKey: ["films", String(page)],
+    queryKey: ['films', String(page)],
     queryFn: () => fetchFilms(page),
   })
 
@@ -47,5 +47,13 @@ export function useFilms() {
     return page === 1
   }, [page])
 
-  return { films: data, onNextPage, onPrevPage, currentPage: page, isDisabledPrevPage, isDisabledNextPage, ...rest }
+  return {
+    films: data,
+    onNextPage,
+    onPrevPage,
+    currentPage: page,
+    isDisabledPrevPage,
+    isDisabledNextPage,
+    ...rest,
+  }
 }

@@ -1,12 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Planets from "./pages/planets"
-import PlanetId from "./pages/planets/id"
-import Characters from "./pages/characters"
-import CharacterId from "./pages/characters/id"
-import Films from "./pages/films"
-import FilmId from "./pages/films/id"
-import { Layout } from "./shared/layout"
-import Signup from "./pages/users/signup"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Planets from './pages/planets'
+import PlanetId from './pages/planets/id'
+import Characters from './pages/characters'
+import CharacterId from './pages/characters/id'
+import Films from './pages/films'
+import FilmId from './pages/films/id'
+import { Layout } from './shared/layout'
+import Signup from './pages/users/signup'
 
 export default function Router() {
   return (

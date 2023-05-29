@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query"
-import { api } from "../resources/api"
-import { planetSchema, planetsSchema } from "../resources/schema/planets"
-import { useCallback, useMemo, useState } from "react"
+import { useQuery } from '@tanstack/react-query'
+import { api } from '../resources/api'
+import { planetSchema, planetsSchema } from '../resources/schema/planets'
+import { useCallback, useMemo, useState } from 'react'
 
 const fetchPlanet = async (id: string) => {
   const res = await api.get(`/planets/${id}`)
@@ -9,7 +9,7 @@ const fetchPlanet = async (id: string) => {
 }
 export function usePlanet(id: string) {
   const { data, ...rest } = useQuery({
-    queryKey: ["planet", id],
+    queryKey: ['planet', id],
     queryFn: () => fetchPlanet(id),
   })
 
@@ -21,20 +21,20 @@ export function usePlanets() {
   const [totalPages, setTotalPages] = useState(1)
 
   const fetchPlanets = async (page: number) => {
-    const res = await api.get("/planets", {
+    const res = await api.get('/planets', {
       params: {
-        page
-      }
+        page,
+      },
     })
     if (page === 1) {
-      setTotalPages(Number(res.headers["total-pages"]))
+      setTotalPages(Number(res.headers['total-pages']))
     }
     return planetsSchema.parse(res.data)
   }
-    const { data, ...rest } = useQuery({
-      queryKey: ["planets", String(page)],
-      queryFn: () => fetchPlanets(page), 
-    })
+  const { data, ...rest } = useQuery({
+    queryKey: ['planets', String(page)],
+    queryFn: () => fetchPlanets(page),
+  })
 
   const onNextPage = useCallback(() => {
     setPage((old) => Math.min(old + 1, totalPages))
@@ -51,7 +51,6 @@ export function usePlanets() {
     return page === 1
   }, [page])
 
-
   return {
     planets: data,
     onNextPage,
@@ -59,8 +58,6 @@ export function usePlanets() {
     currentPage: page,
     isDisabledNextPage,
     isDisabledPrevPage,
-    ...rest
+    ...rest,
   }
 }
-
-

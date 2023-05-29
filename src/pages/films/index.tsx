@@ -1,10 +1,19 @@
-import { useFilms } from "../../hooks/films"
-import Card from "../../shared/card"
-import { Pagination } from "../../shared/pagination"
-import { Container } from "../../ui/container"
+import { useFilms } from '../../hooks/films'
+import Card from '../../shared/card'
+import { Pagination } from '../../shared/pagination'
+import { Container } from '../../ui/container'
 
 export default function Films() {
-  const { films, isLoading, isDisabledNextPage, isDisabledPrevPage, onPrevPage, onNextPage, currentPage, isError } = useFilms()
+  const {
+    films,
+    isLoading,
+    isDisabledNextPage,
+    isDisabledPrevPage,
+    onPrevPage,
+    onNextPage,
+    currentPage,
+    isError,
+  } = useFilms()
 
   return (
     <main>

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom"
-import { styled } from "./styles"
-import star from "../assets/star.svg"
-import wars from "../assets/wars.svg"
-import { AvatarFallback as Fallback, Root } from "@radix-ui/react-avatar"
-import SignOutIcon from "../ui/styles/sign-out"
+import { Link } from 'react-router-dom'
+import { styled } from './styles'
+import star from '../assets/star.svg'
+import wars from '../assets/wars.svg'
+import { AvatarFallback as Fallback, Root } from '@radix-ui/react-avatar'
+import SignOutIcon from '../ui/styles/sign-out'
 
 const Header = styled('header', {
   backgroundColor: '$primary',
@@ -22,42 +22,41 @@ const Ul = styled('ul', {
   gap: '1rem',
   li: {
     paddingLeft: '3rem',
-  }
+  },
 })
 
 const InvisibleButton = styled('button', {
-  background: "transparent",
-  border: "none",
-  padding: "0",
-  cursor: "pointer",
-  outline: "none"
+  background: 'transparent',
+  border: 'none',
+  padding: '0',
+  cursor: 'pointer',
+  outline: 'none',
 })
 
 const AvatarFallback = styled(Fallback, {
-
-  width: "100%",
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "$card"
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '$card',
 })
 
 const AvatarRoot = styled(Root, {
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  verticalAlign: "middle",
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  verticalAlign: 'middle',
   overflow: 'hidden',
-  width: "4rem",
-  height: "4rem",
-  borderRadius: "100%",
-  userSelect: "none"
+  width: '4rem',
+  height: '4rem',
+  borderRadius: '100%',
+  userSelect: 'none',
 })
 
 const StyledLink = styled(Link, {
   textDecoration: 'none',
-  padding: '0'
+  padding: '0',
 })
 
 const Logo = styled('div', {
@@ -66,9 +65,9 @@ const Logo = styled('div', {
   img: {
     transform: 'scale(0.35)',
     '&:last-of-type': {
-      marginTop: '-3rem'
-    }
-  }
+      marginTop: '-3rem',
+    },
+  },
 })
 
 export default function NavBar() {
@@ -77,8 +76,8 @@ export default function NavBar() {
       <Nav>
         <StyledLink to="/">
           <Logo>
-            <img src={star} />
-            <img src={wars} />
+            <img src={star} alt="star" />
+            <img src={wars} alt="wars" />
           </Logo>
         </StyledLink>
         <Ul>

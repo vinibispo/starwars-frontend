@@ -1,34 +1,34 @@
-import { globalCss } from "../../shared/styles.ts"
+import { globalCss } from '../../shared/styles.ts'
 
 export const globalStyles = globalCss({
-  "*": {
+  '*': {
     margin: 0,
     padding: 0,
-    boxSizing: "border-box",
-    color: "$text",
-    fontSize: "1rem",
+    boxSizing: 'border-box',
+    color: '$text',
+    fontSize: '1rem',
   },
   html: {
-    width: "100%",
+    width: '100%',
   },
   body: {
     background: `url("/src/assets/background.jpg") no-repeat`,
-    backgroundSize: "cover",
+    backgroundSize: 'cover',
   },
-  "body, input, button, textarea": {
-    fontFamily: "$primary",
-    fontSize: "1rem",
+  'body, input, button, textarea': {
+    fontFamily: '$primary',
+    fontSize: '1rem',
     fontWeight: 400,
-    color: "$text",
+    color: '$text',
   },
   input: {
-    color: "$primary",
+    color: '$primary',
   },
   button: {
-    cursor: "pointer",
-    color: "$textInButton",
+    cursor: 'pointer',
+    color: '$textInButton',
   },
   h1: {
-    fontSize: "3rem"
-  }
+    fontSize: '3rem',
+  },
 })

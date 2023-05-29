@@ -1,10 +1,19 @@
-import { useCharacters } from "../../hooks/characters"
-import Card from "../../shared/card"
-import { Pagination } from "../../shared/pagination"
-import { Container } from "../../ui/container"
+import { useCharacters } from '../../hooks/characters'
+import Card from '../../shared/card'
+import { Pagination } from '../../shared/pagination'
+import { Container } from '../../ui/container'
 
 export default function Characters() {
-  const { characters, isLoading, isError, onPrevPage, onNextPage, currentPage, isDisabledNextPage, isDisabledPrevPage } = useCharacters()
+  const {
+    characters,
+    isLoading,
+    isError,
+    onPrevPage,
+    onNextPage,
+    currentPage,
+    isDisabledNextPage,
+    isDisabledPrevPage,
+  } = useCharacters()
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -12,8 +21,12 @@ export default function Characters() {
     <main>
       <Container>
         {characters?.map((character) => (
-          <Card id={character.id} key={character.id} title={character.name} type="character">
-          </Card>
+          <Card
+            id={character.id}
+            key={character.id}
+            title={character.name}
+            type="character"
+          ></Card>
         ))}
       </Container>
       <Pagination

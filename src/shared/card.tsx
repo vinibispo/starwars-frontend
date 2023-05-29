@@ -1,18 +1,17 @@
-import { ReactNode } from "react";
-import { styled } from "./styles";
+import { ReactNode } from 'react'
+import { styled } from './styles'
 import film from '../assets/film.svg'
 import planet from '../assets/planet.svg'
 import character from '../assets/character.svg'
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Link as ReactRouterLink } from 'react-router-dom'
 
 type Type = 'planet' | 'character' | 'film'
 type CardProps = {
-  title: string;
+  title: string
   children: ReactNode
   type?: Type
   id: number
 }
-
 
 const CardContainer = styled('div', {
   backgroundColor: '$card',
@@ -29,7 +28,7 @@ const CardContainer = styled('div', {
   '&:hover': {
     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
     transform: 'scale(1.3)',
-  }
+  },
 })
 const Title = styled('h2', {
   fontSize: '1.5rem',
@@ -41,9 +40,14 @@ const Title = styled('h2', {
 
 const Link = styled(ReactRouterLink, {
   color: '$link',
-  marginTop: '0.5rem'
+  marginTop: '0.5rem',
 })
-export default function Card({ title, children, type = 'planet', id }: CardProps) {
+export default function Card({
+  title,
+  children,
+  type = 'planet',
+  id,
+}: CardProps) {
   const getIcon = () => {
     switch (type) {
       case 'planet':

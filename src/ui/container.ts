@@ -1,4 +1,4 @@
-import { styled } from "../shared/styles";
+import { styled } from '../shared/styles'
 
 export const Container = styled('div', {
   display: 'grid',
