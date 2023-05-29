@@ -7,7 +7,8 @@ export const { globalCss, styled, css, keyframes, ...rest } = createStitches({
       primary: "#000",
       text: "#fff",
       secondary: "#987942",
-      card: "#0C1840"
+      card: "#0C1840",
+      error: "#FF0000",
     },
     fonts: {
       'primary': 'Inter',

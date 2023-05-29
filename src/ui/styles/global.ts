@@ -8,6 +8,9 @@ export const globalStyles = globalCss({
     color: "$text",
     fontSize: "1rem",
   },
+  html: {
+    width: "100%",
+  },
   body: {
     background: `url("/src/assets/wallpaper.png") no-repeat`,
     backgroundSize: "cover",
@@ -16,5 +19,9 @@ export const globalStyles = globalCss({
     fontFamily: "$primary",
     fontSize: "1rem",
     fontWeight: 400,
-  }
+    color: "$text",
+  },
+  input: {
+    color: "$primary",
+  },
 })

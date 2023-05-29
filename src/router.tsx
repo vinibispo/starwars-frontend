@@ -6,13 +6,14 @@ import CharacterId from "./pages/characters/id"
 import Films from "./pages/films"
 import FilmId from "./pages/films/id"
 import { Layout } from "./shared/layout"
+import Signup from "./pages/users/signup"
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-        <Route path="/planets" element={<Planets />} />
+          <Route path="/planets" element={<Planets />} />
           <Route path="/planets/:id" element={<PlanetId />} />
           <Route path="/characters" element={<Characters />} />
           <Route path="/characters/:id" element={<CharacterId />} />
@@ -20,6 +21,8 @@ export default function Router() {
           <Route path="/films/:id" element={<FilmId />} />
           <Route path="/" element={<div>Home</div>} />
         </Route>
+
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   )
