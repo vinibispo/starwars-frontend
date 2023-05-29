@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import { styled } from "./styles"
 import star from "../assets/star.svg"
 import wars from "../assets/wars.svg"
+import { AvatarFallback as Fallback, Root } from "@radix-ui/react-avatar"
+import SignOutIcon from "../ui/styles/sign-out"
 
 const Header = styled('header', {
   backgroundColor: '$primary',
@@ -23,6 +25,36 @@ const Ul = styled('ul', {
   }
 })
 
+const InvisibleButton = styled('button', {
+  background: "transparent",
+  border: "none",
+  padding: "0",
+  cursor: "pointer",
+  outline: "none"
+})
+
+const AvatarFallback = styled(Fallback, {
+
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "$card"
+})
+
+const AvatarRoot = styled(Root, {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  verticalAlign: "middle",
+  overflow: 'hidden',
+  width: "4rem",
+  height: "4rem",
+  borderRadius: "100%",
+  userSelect: "none"
+})
+
 const StyledLink = styled(Link, {
   textDecoration: 'none',
   padding: '0'
@@ -37,8 +69,8 @@ const Logo = styled('div', {
       marginTop: '-3rem'
     }
   }
-
 })
+
 export default function NavBar() {
   return (
     <Header>
@@ -60,6 +92,12 @@ export default function NavBar() {
             <StyledLink to="/films">Films</StyledLink>
           </li>
         </Ul>
+        <AvatarRoot>
+          <AvatarFallback>VB</AvatarFallback>
+        </AvatarRoot>
+        <InvisibleButton>
+          <SignOutIcon />
+        </InvisibleButton>
       </Nav>
     </Header>
   )
