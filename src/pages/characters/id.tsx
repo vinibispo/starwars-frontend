@@ -1,7 +1,26 @@
 import { Link, useParams } from "react-router-dom"
 import { useCharacter } from "../../hooks/characters"
 import Card from "../../shared/card";
+import { styled } from "../../shared/styles";
 
+const CardContainer = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+  gap: "1rem",
+  padding: "1rem",
+})
+
+const Container = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  gap: "1rem",
+  padding: "1rem",
+  justifyContent: "center",
+  'h3': {
+    alignSelf: 'center',
+    scale: 3,
+  }
+})
 export default function CharacterId() {
   const { id } = useParams();
   if (!id) throw new Error("No id")
@@ -16,21 +35,27 @@ export default function CharacterId() {
         <div>
           <h2>{character?.name}</h2>
           <p>{character?.gender}</p>
-          <div>
-            {character?.films.map((film) => (
-              <Card key={film.id} title={film.title} type="film">
-                <Link to={`/films/${film.id}`}>View</Link>
-              </Card>
-            ))}
-          </div>
+          <Container>
+            <h3>Films</h3>
+            <CardContainer>
+              {character?.films.map((film) => (
+                <Card key={film.id} title={film.title} type="film">
+                  <Link to={`/films/${film.id}`}>View</Link>
+                </Card>
+              ))}
+            </CardContainer>
+          </Container>
 
-          <div>
+          <Container>
+            <h3>Planet</h3>
             {character?.planet && (
-              <Card title={character.planet.name} type="planet">
-                <Link to={`/planets/${character?.planet.id}`}>View</Link>
-              </Card>
+              <CardContainer>
+                <Card title={character.planet.name} type="planet">
+                  <Link to={`/planets/${character?.planet.id}`}>View</Link>
+                </Card>
+              </CardContainer>
             )}
-          </div>
+          </Container>
         </div>
       )}
     </div>
