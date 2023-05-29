@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { usePlanets } from "../../hooks/planets"
 import Card from "../../shared/card"
 import { styled } from "../../shared/styles"
+import { Pagination } from "../../shared/pagination"
 
 const Container = styled('div', {
   display: 'grid',
@@ -9,8 +10,9 @@ const Container = styled('div', {
   gap: '1rem',
   padding: '1rem',
 })
+
 export default function Planets() {
-  const { planets, isLoading, isError } = usePlanets()
+  const { planets, isLoading, isError, onNextPage, onPrevPage, currentPage, isDisabledNextPage, isDisabledPrevPage } = usePlanets()
   return (
     <main>
       <Container>
@@ -23,6 +25,13 @@ export default function Planets() {
           </Card>
         ))}
       </Container>
+      <Pagination
+        onNextPage={onNextPage}
+        onPrevPage={onPrevPage}
+        currentPage={currentPage}
+        isDisabledNextPage={isDisabledNextPage || isLoading || isError}
+        isDisabledPrevPage={isDisabledPrevPage || isLoading || isError}
+      />
     </main>
   )
 }

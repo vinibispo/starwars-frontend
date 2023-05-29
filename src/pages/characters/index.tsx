@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useCharacters } from "../../hooks/characters"
 import Card from "../../shared/card"
 import { styled } from "../../shared/styles"
+import { Pagination } from "../../shared/pagination"
 
 const Container = styled('div', {
   display: 'grid',
@@ -10,7 +11,7 @@ const Container = styled('div', {
   padding: '1rem',
 })
 export default function Characters() {
-  const { characters, isLoading, isError, error } = useCharacters()
+  const { characters, isLoading, isError, onPrevPage, onNextPage, currentPage, isDisabledNextPage, isDisabledPrevPage } = useCharacters()
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -24,6 +25,13 @@ export default function Characters() {
           </Card>
         ))}
       </Container>
+      <Pagination
+        onPrevPage={onPrevPage}
+        onNextPage={onNextPage}
+        currentPage={currentPage}
+        isDisabledNextPage={isDisabledNextPage || isLoading || isError}
+        isDisabledPrevPage={isDisabledPrevPage || isLoading || isError}
+      />
     </main>
   )
 }

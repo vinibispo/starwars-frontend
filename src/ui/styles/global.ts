@@ -13,7 +13,7 @@ export const globalStyles = globalCss({
     backgroundSize: "cover",
   },
   "body, input, button, textarea": {
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "$primary",
     fontSize: "1rem",
     fontWeight: 400,
   }

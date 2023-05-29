@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useFilms } from "../../hooks/films"
 import { styled } from "../../shared/styles"
 import Card from "../../shared/card"
+import { Pagination } from "../../shared/pagination"
 
 const Container = styled('div', {
   display: 'grid',
@@ -10,7 +11,7 @@ const Container = styled('div', {
   padding: '1rem',
 })
 export default function Films() {
-  const { films, isLoading } = useFilms()
+  const { films, isLoading, isDisabledNextPage, isDisabledPrevPage, onPrevPage, onNextPage, currentPage, isError } = useFilms()
 
   return (
     <main>
@@ -25,6 +26,13 @@ export default function Films() {
           ))}
         </Container>
       )}
+      <Pagination
+        isDisabledNextPage={isDisabledNextPage || isLoading || isError}
+        isDisabledPrevPage={isDisabledPrevPage || isLoading || isError}
+        onNextPage={onNextPage}
+        onPrevPage={onPrevPage}
+        currentPage={currentPage}
+      />
     </main>
   )
 }
