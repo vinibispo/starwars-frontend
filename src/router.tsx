@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Navigate,
+  Outlet,
+} from 'react-router-dom'
 import Planets from './pages/planets'
 import PlanetId from './pages/planets/id'
 import Characters from './pages/characters'
@@ -7,22 +13,38 @@ import Films from './pages/films'
 import FilmId from './pages/films/id'
 import { Layout } from './shared/layout'
 import Signup from './pages/users/signup'
-
+const useAuth = () => {
+  return { isAuthenticated: true }
+}
 export default function Router() {
+  const { isAuthenticated } = useAuth()
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/planets" element={<Planets />} />
-          <Route path="/planets/:id" element={<PlanetId />} />
-          <Route path="/characters" element={<Characters />} />
-          <Route path="/characters/:id" element={<CharacterId />} />
-          <Route path="/films" element={<Films />} />
-          <Route path="/films/:id" element={<FilmId />} />
-          <Route path="/" element={<div>Home</div>} />
-        </Route>
+        {isAuthenticated ? (
+          <Route element={<Layout />}>
+            <Route path="/planets" element={<Planets />} />
+            <Route path="/planets/:id" element={<PlanetId />} />
+            <Route path="/characters" element={<Characters />} />
+            <Route path="/characters/:id" element={<CharacterId />} />
+            <Route path="/films" element={<Films />} />
+            <Route path="/films/:id" element={<FilmId />} />
+            <Route path="/" element={<div>Home</div>} />
+          </Route>
+        ) : (
+          <Route path="*" element={<Navigate to="/signin" replace />} />
+        )}
 
-        <Route path="/signup" element={<Signup />} />
+        <Route element={<Outlet />}>
+          {!isAuthenticated ? (
+            <>
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/signin" element={<div> Sign In</div>} />
+            </>
+          ) : (
+            <Route path="*" element={<Navigate to="/" replace />} />
+          )}
+        </Route>
       </Routes>
     </BrowserRouter>
   )
