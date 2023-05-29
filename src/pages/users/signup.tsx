@@ -1,69 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { styled } from "../../shared/styles"
 import { z } from "zod"
 import SignInIcon from "../../ui/sign-in"
+import { Button, Container, FormContainer, FormError, Input, InputContainer, Label,  } from "./shared/form"
 
-
-const Container = styled("div", {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "100vh",
-})
-const FormContainer = styled("form", {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexDirection: "column",
-  gap: "2rem",
-  maxWidth: "400px",
-  padding: "2rem",
-  borderRadius: "10px",
-})
-
-const FormError = styled("div", {
-  color: "$error",
-  fontSize: "1rem",
-  textAlign: "center",
-  marginTop: "0.25rem",
-  maxWidth: "200px"
-})
-
-const InputContainer = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-})
-
-const Input = styled("input", {
-  padding: "0.5rem",
-  border: "1px solid $gray500",
-  borderRadius: "8px",
-  "&:focus": {
-    outline: "none",
-    borderColor: "#ccc",
-  },
-})
-
-const Label = styled("label", {
-  marginBottom: "1rem",
-})
-
-const Button = styled("button", {
-  padding: "0.5rem 1rem",
-  border: "1px solid $secondary",
-  backgroundColor: "$secondary",
-  borderRadius: "8px",
-  display: "flex",
-  alignItems: "center",
-  "&:focus": {
-    outline: "none",
-  },
-  span: {
-    fontSize: "1rem",
-    color: "$textInButton"
-  }
-})
 
 const createUserSchema = z.object({
   name: z.string().nonempty("Name should not be empty").transform(
