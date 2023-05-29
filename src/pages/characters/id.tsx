@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useCharacter } from "../../hooks/characters"
 import Card from "../../shared/card";
 import { styled } from "../../shared/styles";
@@ -21,6 +21,18 @@ const Container = styled("div", {
     scale: 3,
   }
 })
+
+const CharacterContainer = styled("div", {
+  display: "flex",
+  gap: "2rem",
+  margin: "1rem",
+  background: "#2e557c",
+  padding: "4rem",
+})
+
+const Wrapper = styled("div", {
+
+})
 export default function CharacterId() {
   const { id } = useParams();
   if (!id) throw new Error("No id")
@@ -32,15 +44,25 @@ export default function CharacterId() {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div>
-          <h2>{character?.name}</h2>
-          <p>{character?.gender}</p>
+        <>
+        <CharacterContainer>
+          <Wrapper>
+            <h1>{character?.name}</h1>
+            <p>Gender: {character?.gender}</p>
+            <p>Birth Year: {character?.birth_year}</p>
+            <p>Height: {character?.height}</p>
+            <p>Mass: {character?.mass}</p>
+            <p>Eye Color: {character?.eye_color}</p>
+            <p>Hair Color: {character?.hair_color}</p>
+            <p>Skin Color: {character?.skin_color}</p>
+
+          </Wrapper>
+          </CharacterContainer>
           <Container>
             <h3>Films</h3>
             <CardContainer>
               {character?.films.map((film) => (
-                <Card key={film.id} title={film.title} type="film">
-                  <Link to={`/films/${film.id}`}>View</Link>
+                <Card id={film.id} key={film.id} title={film.title} type="film">
                 </Card>
               ))}
             </CardContainer>
@@ -50,13 +72,12 @@ export default function CharacterId() {
             <h3>Planet</h3>
             {character?.planet && (
               <CardContainer>
-                <Card title={character.planet.name} type="planet">
-                  <Link to={`/planets/${character?.planet.id}`}>View</Link>
+                <Card id={character.planet.id} title={character.planet.name} type="planet">
                 </Card>
               </CardContainer>
             )}
           </Container>
-        </div>
+        </>
       )}
     </div>
   )

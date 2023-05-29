@@ -1,15 +1,8 @@
-import { Link } from "react-router-dom"
 import { useFilms } from "../../hooks/films"
-import { styled } from "../../shared/styles"
 import Card from "../../shared/card"
 import { Pagination } from "../../shared/pagination"
+import { Container } from "../../ui/container"
 
-const Container = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-  gap: '1rem',
-  padding: '1rem',
-})
 export default function Films() {
   const { films, isLoading, isDisabledNextPage, isDisabledPrevPage, onPrevPage, onNextPage, currentPage, isError } = useFilms()
 
@@ -20,8 +13,8 @@ export default function Films() {
       ) : (
         <Container>
           {films?.map((film) => (
-            <Card key={film.id} title={film.title} type="film">
-              <Link to={`/films/${film.id}`}>View</Link>
+            <Card id={film.id} key={film.id} title={film.title} type="film">
+              <p>Episode: {film.episode_id}</p>
             </Card>
           ))}
         </Container>

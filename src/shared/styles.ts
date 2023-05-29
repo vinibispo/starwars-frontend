@@ -6,9 +6,11 @@ export const { globalCss, styled, css, keyframes, ...rest } = createStitches({
     colors: {
       primary: "#000",
       text: "#fff",
-      secondary: "#987942",
-      card: "#0C1840",
-      error: "#FF0000",
+      textInButton: "#000",
+      secondary: "#ffe81f",
+      card: "#0B1838",
+      error: "#EB212E",
+      link: "#2FF923",
     },
     fonts: {
       'primary': 'Inter',

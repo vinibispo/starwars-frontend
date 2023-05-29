@@ -3,11 +3,15 @@ import { styled } from "./styles"
 import star from "../assets/star.svg"
 import wars from "../assets/wars.svg"
 
+const Header = styled('header', {
+  backgroundColor: '$primary',
+})
 const Nav = styled('nav', {
   display: 'flex',
   justifyContent: 'space-around',
-  backgroundColor: '$primary',
   alignItems: 'center',
+  maxWidth: '1200px',
+  margin: '0 auto',
 })
 const Ul = styled('ul', {
   display: 'flex',
@@ -37,7 +41,7 @@ const Logo = styled('div', {
 })
 export default function NavBar() {
   return (
-    <header>
+    <Header>
       <Nav>
         <StyledLink to="/">
           <Logo>
@@ -57,6 +61,6 @@ export default function NavBar() {
           </li>
         </Ul>
       </Nav>
-    </header>
+    </Header>
   )
 }

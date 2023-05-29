@@ -12,7 +12,7 @@ export const globalStyles = globalCss({
     width: "100%",
   },
   body: {
-    background: `url("/src/assets/wallpaper.png") no-repeat`,
+    background: `url("/src/assets/background.jpg") no-repeat`,
     backgroundSize: "cover",
   },
   "body, input, button, textarea": {
@@ -24,4 +24,11 @@ export const globalStyles = globalCss({
   input: {
     color: "$primary",
   },
+  button: {
+    cursor: "pointer",
+    color: "$textInButton",
+  },
+  h1: {
+    fontSize: "3rem"
+  }
 })

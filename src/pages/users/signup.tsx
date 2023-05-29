@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { styled } from "../../shared/styles"
 import { z } from "zod"
+import SignInIcon from "../../ui/sign-in"
 
 
 const Container = styled("div", {
@@ -23,9 +24,10 @@ const FormContainer = styled("form", {
 
 const FormError = styled("div", {
   color: "$error",
-  fontSize: "0.8rem",
+  fontSize: "1rem",
   textAlign: "center",
-  marginTop: "0.25rem"
+  marginTop: "0.25rem",
+  maxWidth: "200px"
 })
 
 const InputContainer = styled("div", {
@@ -52,22 +54,27 @@ const Button = styled("button", {
   border: "1px solid $secondary",
   backgroundColor: "$secondary",
   borderRadius: "8px",
+  display: "flex",
+  alignItems: "center",
   "&:focus": {
     outline: "none",
-    borderColor: "$gray700",
   },
+  span: {
+    fontSize: "1rem",
+    color: "$textInButton"
+  }
 })
 
 const createUserSchema = z.object({
   name: z.string().nonempty("Name should not be empty").transform(
-   name => name.trim().split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
+    name => name.trim().split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
   ),
   email: z.string().email().nonempty("Email should not be empty"),
   password: z.string().min(8, "Password should be at least eight characters"),
 })
 type CreateUser = z.infer<typeof createUserSchema>
 export default function Signup() {
-  const { handleSubmit, register, formState: {errors} } = useForm<CreateUser>({
+  const { handleSubmit, register, formState: { errors } } = useForm<CreateUser>({
     resolver: zodResolver(createUserSchema),
   })
 
@@ -97,7 +104,7 @@ export default function Signup() {
         </InputContainer>
         <InputContainer>
           <Button type="submit">
-            Signup
+            <span>Sign Up</span> <SignInIcon />
           </Button>
         </InputContainer>
       </FormContainer>
