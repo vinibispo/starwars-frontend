@@ -16,11 +16,11 @@ import Signup from './pages/users/signup'
 import SignIn from './pages/users/signin'
 import { useAuth } from './hooks/user'
 export default function Router() {
-  const { isAuthenticated } = useAuth()
+  const { isValidAuth, isInvalidAuth } = useAuth()
   return (
     <BrowserRouter>
       <Routes>
-        {isAuthenticated ? (
+        {isValidAuth ? (
           <Route element={<Layout />}>
             <Route path="/planets" element={<Planets />} />
             <Route path="/planets/:id" element={<PlanetId />} />
@@ -35,7 +35,7 @@ export default function Router() {
         )}
 
         <Route element={<Outlet />}>
-          {!isAuthenticated ? (
+          {isInvalidAuth ? (
             <>
               <Route path="/signup" element={<Signup />} />
               <Route path="/signin" element={<SignIn />} />

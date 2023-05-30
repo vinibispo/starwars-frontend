@@ -10,8 +10,10 @@ import {
   Input,
   InputContainer,
   Label,
+  Link,
 } from './shared/form'
 import { useSignUp } from '../../hooks/user'
+import { AxiosError } from 'axios'
 
 const createUserSchema = z.object({
   name: z
@@ -32,41 +34,70 @@ export default function Signup() {
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    setError,
   } = useForm<CreateUser>({
     resolver: zodResolver(createUserSchema),
   })
 
-  const { mutateAsync, isLoading } = useSignUp()
+  const { mutateAsync } = useSignUp()
 
   const onSubmit = async (data: CreateUser) => {
-    try {
-      await mutateAsync(data)
-    } catch (error) {
-      console.log(error)
-    }
+    await mutateAsync(data, {
+      onError: (error) => {
+        if (error instanceof AxiosError) {
+          setError('email', {
+            message: error.response?.data.errors,
+          })
+
+          setError('password', {
+            message: error.response?.data.errors,
+          })
+
+          setError('name', {
+            message: error.response?.data.errors,
+          })
+        } else {
+          console.log(error)
+        }
+      },
+    })
   }
 
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <InputContainer>
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" {...register('name')} />
+          <Label htmlFor="name" error={!!errors.name}>
+            Name
+          </Label>
+          <Input id="name" error={!!errors.name} {...register('name')} />
           {errors.name && <FormError>{errors.name.message}</FormError>}
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" {...register('email')} />
+          <Label htmlFor="email" error={!!errors.email}>
+            Email
+          </Label>
+          <Input id="email" error={!!errors.email} {...register('email')} />
           {errors.email && <FormError>{errors.email.message}</FormError>}
         </InputContainer>
         <InputContainer>
-          <Label htmlFor="password">Password</Label>
-          <Input type="password" id="password" {...register('password')} />
+          <Label htmlFor="password" error={!!errors.password}>
+            Password
+          </Label>
+          <Input
+            type="password"
+            id="password"
+            {...register('password')}
+            error={!!errors.password}
+          />
           {errors.password && <FormError>{errors.password.message}</FormError>}
         </InputContainer>
         <InputContainer>
-          <Button disabled={isLoading} type="submit">
+          <Link to="/signin">Already have an account? Sign in</Link>
+        </InputContainer>
+        <InputContainer>
+          <Button disabled={isSubmitting} type="submit">
             <span>Sign Up</span> <SignInIcon />
           </Button>
         </InputContainer>

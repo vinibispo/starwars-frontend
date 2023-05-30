@@ -14,8 +14,17 @@ export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) throw new Error('useAuth must be used within AuthProvider')
 
-  const { user, status, setUser, setStatus, setInStorage } = context
+  const { user, status, setUser, setStatus, setInStorage, removeInStorage } =
+    context
   const isAuthenticated = status === 'authenticated'
+  const isValidAuth = ['authenticated', 'checking'].includes(status)
+
+  const isInvalidAuth = ['unauthenticated', 'checking'].includes(status)
+  const signOut = () => {
+    setStatus('unauthenticated')
+    setUser({ name: '', email: '', token: '' })
+    removeInStorage()
+  }
 
   return {
     user,
@@ -23,34 +32,36 @@ export const useAuth = () => {
     setUser,
     setStatus,
     isAuthenticated,
+    isInvalidAuth,
     setInStorage,
+    signOut,
+    isValidAuth,
   }
 }
 
 export const useSignUp = () => {
-  const { setUser, setStatus, user, status, setInStorage } = useAuth()
+  const { setUser, setStatus, setInStorage } = useAuth()
   const handleFetch = async ({ name, email, password }: UserData) => {
-    const response = await api.post('/users', {
-      user: {
-        name,
-        email,
-        password,
-      },
-    })
-    if (userSchema.safeParse(response.data).success) {
-      setUser(response.data)
-      setStatus('authenticated')
-      return response.data
-    } else {
+    try {
+      const response = await api.post('/users', {
+        user: {
+          name,
+          email,
+          password,
+        },
+      })
+      if (userSchema.safeParse(response.data).success) {
+        setUser(response.data)
+        setStatus('authenticated')
+        return response.data
+      }
       setStatus('unauthenticated')
-      throw new Error('Invalid user data')
+    } catch (error) {
+      setStatus('unauthenticated')
+      throw error
     }
   }
-  const {
-    mutate,
-    status: _,
-    ...rest
-  } = useMutation({
+  const { mutate, ...rest } = useMutation({
     mutationFn: handleFetch,
     mutationKey: ['signup'],
     onSuccess: (data, _, _ctx) => {
@@ -59,8 +70,51 @@ export const useSignUp = () => {
   })
 
   return {
-    user,
-    status,
+    mutate,
+    ...rest,
+  }
+}
+
+type SignInData = {
+  email: string
+  password: string
+}
+export const useSignIn = () => {
+  const { setUser, setStatus, setInStorage } = useAuth()
+
+  const handleFetch = async ({ email, password }: SignInData) => {
+    try {
+      const response = await api.post('/sessions', {
+        session: {
+          email,
+          password,
+        },
+      })
+      if (userSchema.safeParse(response.data).success) {
+        setUser(response.data)
+        setStatus('authenticated')
+        return response.data
+      }
+      setStatus('unauthenticated')
+    } catch (error) {
+      setStatus('unauthenticated')
+      throw error
+    }
+  }
+
+  const {
+    mutate,
+    status: _,
+    ...rest
+  } = useMutation({
+    mutationFn: handleFetch,
+    mutationKey: ['signin'],
+    onSuccess: (data, _, _ctx) => {
+      setInStorage(data)
+    },
+  })
+
+  return {
     mutate,
     ...rest,
   }

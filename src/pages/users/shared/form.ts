@@ -1,4 +1,5 @@
 import { styled } from '../../../shared/styles'
+import { Link as ReactRouterLink } from 'react-router-dom'
 
 export const Container = styled('div', {
   display: 'flex',
@@ -32,16 +33,31 @@ export const InputContainer = styled('div', {
 
 export const Input = styled('input', {
   padding: '0.5rem',
-  border: '1px solid $gray500',
+  border: '1px solid',
   borderRadius: '8px',
   '&:focus': {
     outline: 'none',
     borderColor: '#ccc',
   },
+  variants: {
+    error: {
+      true: {
+        borderColor: '$error',
+        borderWidth: '3px',
+      },
+    },
+  },
 })
 
 export const Label = styled('label', {
   marginBottom: '1rem',
+  variants: {
+    error: {
+      true: {
+        color: '$error',
+      },
+    },
+  },
 })
 
 export const Button = styled('button', {
@@ -66,4 +82,9 @@ export const Button = styled('button', {
     fontSize: '1rem',
     color: '$textInButton',
   },
+})
+
+export const Link = styled(ReactRouterLink, {
+  color: '$link',
+  fontWeight: 'bold',
 })

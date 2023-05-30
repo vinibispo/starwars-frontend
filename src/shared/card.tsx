@@ -8,7 +8,7 @@ import { Link as ReactRouterLink } from 'react-router-dom'
 type Type = 'planet' | 'character' | 'film'
 type CardProps = {
   title: string
-  children: ReactNode
+  children?: ReactNode
   type?: Type
   id: number
 }

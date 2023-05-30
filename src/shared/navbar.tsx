@@ -76,10 +76,11 @@ const Logo = styled('div', {
 export default function NavBar() {
   const {
     user: { name },
+    signOut,
   } = useAuth()
   const initials = name
     .split(' ')
-    .map((n) => n[0].toUpperCase())
+    .map((n) => n[0]?.toUpperCase() ?? '')
     .join('')
   return (
     <Header>
@@ -104,7 +105,7 @@ export default function NavBar() {
         <AvatarRoot>
           <AvatarFallback>{initials}</AvatarFallback>
         </AvatarRoot>
-        <InvisibleButton>
+        <InvisibleButton onClick={signOut}>
           <SignOutIcon />
         </InvisibleButton>
       </Nav>
