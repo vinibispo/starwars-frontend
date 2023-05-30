@@ -10,6 +10,7 @@ const Header = styled('header', {
   backgroundColor: '$primary',
   position: 'sticky',
   top: '0',
+  zIndex: '999',
 })
 const Nav = styled('nav', {
   display: 'flex',

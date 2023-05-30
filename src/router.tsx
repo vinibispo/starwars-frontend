@@ -17,6 +17,7 @@ import SignIn from './pages/users/signin'
 import { useAuth } from './hooks/user'
 import ForgotPassword from './pages/users/forgot-password'
 import ResetPassword from './pages/users/reset-password'
+import Home from './pages/home'
 export default function Router() {
   const { isValidAuth, isInvalidAuth } = useAuth()
   return (
@@ -30,7 +31,7 @@ export default function Router() {
             <Route path="/characters/:id" element={<CharacterId />} />
             <Route path="/films" element={<Films />} />
             <Route path="/films/:id" element={<FilmId />} />
-            <Route path="/" element={<div>Home</div>} />
+            <Route path="/" element={<Home />} />
           </Route>
         ) : (
           <Route path="*" element={<Navigate to="/signin" replace />} />
