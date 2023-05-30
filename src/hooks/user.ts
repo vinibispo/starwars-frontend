@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { api } from '../resources/api'
 import { useContext } from 'react'
-import { storage } from '../resources/storage'
 import { AuthContext } from '../shared/contexts/auth-context'
 import { userSchema } from '../resources/schema/user'
 
@@ -15,7 +14,7 @@ export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) throw new Error('useAuth must be used within AuthProvider')
 
-  const { user, status, setUser, setStatus } = context
+  const { user, status, setUser, setStatus, setInStorage } = context
   const isAuthenticated = status === 'authenticated'
 
   return {
@@ -24,11 +23,12 @@ export const useAuth = () => {
     setUser,
     setStatus,
     isAuthenticated,
+    setInStorage,
   }
 }
 
 export const useSignUp = () => {
-  const { setUser, setStatus, user, status } = useAuth()
+  const { setUser, setStatus, user, status, setInStorage } = useAuth()
   const handleFetch = async ({ name, email, password }: UserData) => {
     const response = await api.post('/users', {
       user: {
@@ -54,7 +54,7 @@ export const useSignUp = () => {
     mutationFn: handleFetch,
     mutationKey: ['signup'],
     onSuccess: (data, _, _ctx) => {
-      storage.setItem('@starwars/user', data)
+      setInStorage(data)
     },
   })
 
