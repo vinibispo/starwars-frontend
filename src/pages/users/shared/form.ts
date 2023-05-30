@@ -54,6 +54,14 @@ export const Button = styled('button', {
   '&:focus': {
     outline: 'none',
   },
+  '&:hover': {
+    filter: 'brightness(0.9)',
+  },
+
+  '&:disabled': {
+    filter: 'brightness(0.3)',
+    cursor: 'not-allowed',
+  },
   span: {
     fontSize: '1rem',
     color: '$textInButton',

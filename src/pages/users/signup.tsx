@@ -11,6 +11,7 @@ import {
   InputContainer,
   Label,
 } from './shared/form'
+import { useSignUp } from '../../hooks/user'
 
 const createUserSchema = z.object({
   name: z
@@ -36,9 +37,19 @@ export default function Signup() {
     resolver: zodResolver(createUserSchema),
   })
 
+  const { mutateAsync, isLoading } = useSignUp()
+
+  const onSubmit = async (data: CreateUser) => {
+    try {
+      await mutateAsync(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Container>
-      <FormContainer onSubmit={handleSubmit((data) => console.log(data))}>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <InputContainer>
           <Label htmlFor="name">Name</Label>
           <Input id="name" {...register('name')} />
@@ -55,7 +66,7 @@ export default function Signup() {
           {errors.password && <FormError>{errors.password.message}</FormError>}
         </InputContainer>
         <InputContainer>
-          <Button type="submit">
+          <Button disabled={isLoading} type="submit">
             <span>Sign Up</span> <SignInIcon />
           </Button>
         </InputContainer>

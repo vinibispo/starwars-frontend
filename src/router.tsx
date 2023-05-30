@@ -13,9 +13,8 @@ import Films from './pages/films'
 import FilmId from './pages/films/id'
 import { Layout } from './shared/layout'
 import Signup from './pages/users/signup'
-const useAuth = () => {
-  return { isAuthenticated: true }
-}
+import SignIn from './pages/users/signin'
+import { useAuth } from './hooks/user'
 export default function Router() {
   const { isAuthenticated } = useAuth()
   return (
@@ -39,7 +38,7 @@ export default function Router() {
           {!isAuthenticated ? (
             <>
               <Route path="/signup" element={<Signup />} />
-              <Route path="/signin" element={<div> Sign In</div>} />
+              <Route path="/signin" element={<SignIn />} />
             </>
           ) : (
             <Route path="*" element={<Navigate to="/" replace />} />

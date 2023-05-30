@@ -4,9 +4,12 @@ import star from '../assets/star.svg'
 import wars from '../assets/wars.svg'
 import { AvatarFallback as Fallback, Root } from '@radix-ui/react-avatar'
 import SignOutIcon from '../ui/styles/sign-out'
+import { useAuth } from '../hooks/user'
 
 const Header = styled('header', {
   backgroundColor: '$primary',
+  position: 'sticky',
+  top: '0',
 })
 const Nav = styled('nav', {
   display: 'flex',
@@ -71,6 +74,13 @@ const Logo = styled('div', {
 })
 
 export default function NavBar() {
+  const {
+    user: { name },
+  } = useAuth()
+  const initials = name
+    .split(' ')
+    .map((n) => n[0].toUpperCase())
+    .join('')
   return (
     <Header>
       <Nav>
@@ -92,7 +102,7 @@ export default function NavBar() {
           </li>
         </Ul>
         <AvatarRoot>
-          <AvatarFallback>VB</AvatarFallback>
+          <AvatarFallback>{initials}</AvatarFallback>
         </AvatarRoot>
         <InvisibleButton>
           <SignOutIcon />

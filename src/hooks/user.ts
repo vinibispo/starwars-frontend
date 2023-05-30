@@ -1,23 +1,35 @@
 import { useMutation } from '@tanstack/react-query'
 import { api } from '../resources/api'
-import { useState } from 'react'
-import { User, userSchema } from '../resources/schema/user'
+import { useContext } from 'react'
 import { storage } from '../resources/storage'
+import { AuthContext } from '../shared/contexts/auth-context'
+import { userSchema } from '../resources/schema/user'
 
-type Status = 'checking' | 'authenticated' | 'unauthenticated'
 type UserData = {
   email: string
   name: string
   password: string
 }
+
+export const useAuth = () => {
+  const context = useContext(AuthContext)
+  if (!context) throw new Error('useAuth must be used within AuthProvider')
+
+  const { user, status, setUser, setStatus } = context
+  const isAuthenticated = status === 'authenticated'
+
+  return {
+    user,
+    status,
+    setUser,
+    setStatus,
+    isAuthenticated,
+  }
+}
+
 export const useSignUp = () => {
-  const [user, setUser] = useState<User>({
-    name: '',
-    email: '',
-    token: '',
-  })
-  const [status, setStatus] = useState<Status>('checking')
-  const handleFetch = ({ name, email, password }: UserData) => {
+  const { setUser, setStatus, user, status } = useAuth()
+  const handleFetch = async ({ name, email, password }: UserData) => {
     const response = await api.post('/users', {
       user: {
         name,
@@ -34,7 +46,11 @@ export const useSignUp = () => {
       throw new Error('Invalid user data')
     }
   }
-  const { mutate } = useMutation({
+  const {
+    mutate,
+    status: _,
+    ...rest
+  } = useMutation({
     mutationFn: handleFetch,
     mutationKey: ['signup'],
     onSuccess: (data, _, _ctx) => {
@@ -46,5 +62,6 @@ export const useSignUp = () => {
     user,
     status,
     mutate,
+    ...rest,
   }
 }
