@@ -1,5 +1,6 @@
 import { globalCss } from '../../shared/styles.ts'
 
+import background from '../../assets/background.jpg'
 export const globalStyles = globalCss({
   '*': {
     margin: 0,
@@ -12,7 +13,7 @@ export const globalStyles = globalCss({
     width: '100%',
   },
   body: {
-    background: `url("/src/assets/background.jpg") no-repeat`,
+    background: `url(${background}) no-repeat`,
     backgroundSize: 'cover',
   },
   'body, input, button, textarea': {
