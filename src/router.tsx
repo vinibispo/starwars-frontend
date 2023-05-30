@@ -15,6 +15,8 @@ import { Layout } from './shared/layout'
 import Signup from './pages/users/signup'
 import SignIn from './pages/users/signin'
 import { useAuth } from './hooks/user'
+import ForgotPassword from './pages/users/forgot-password'
+import ResetPassword from './pages/users/reset-password'
 export default function Router() {
   const { isValidAuth, isInvalidAuth } = useAuth()
   return (
@@ -39,6 +41,8 @@ export default function Router() {
             <>
               <Route path="/signup" element={<Signup />} />
               <Route path="/signin" element={<SignIn />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
             </>
           ) : (
             <Route path="*" element={<Navigate to="/" replace />} />
