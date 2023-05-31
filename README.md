@@ -2,6 +2,9 @@
 
 This is a Star Wars App that uses ViteJS, and TypeScript. This app consumes the [Star Wars Backend API](https://github.com/vinibispo/starwars-backend)
 
+# Showcase
+[![Watch the video](https://img.youtube.com/vi/JFvhWJY0OLU/maxresdefault.jpg)](https://youtu.be/JFvhWJY0OLU)
+
 
 ## Prerequisites
 
