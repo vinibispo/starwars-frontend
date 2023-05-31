@@ -54,6 +54,7 @@ In the project directory, you can run the following scripts:
 
 The project structure follows the standard setup of a ViteJS project with TypeScript:
 
+```terminal
 ├── index.html
 ├── package.json
 ├── public
@@ -126,7 +127,7 @@ The project structure follows the standard setup of a ViteJS project with TypeSc
 ├── tsconfig.node.json
 ├── vite.config.ts
 └── yarn.lock
-
+```
 You can modify and extend the project structure to suit your needs.
 
 ## Learn More
